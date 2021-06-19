@@ -126,7 +126,16 @@ namespace QSoft.XmlserializerEx
                                 xmlw.WriteStartElement(pp.Name);
                                 foreach (var listitem in ll as IEnumerable)
                                 {
+                                    Type listitemtype = listitem.GetType();
+                                    if (listitemtype.GetProperties().Count() > 0)
+                                    {
+                                        xmlw.WriteStartElement(listitemtype.Name);
+                                    }
                                     Serialize(listitem, xmlw);
+                                    if (listitemtype.GetProperties().Count() > 0)
+                                    {
+                                        xmlw.WriteEndElement();
+                                    }
                                 }
                                 xmlw.WriteEndElement();
                             }

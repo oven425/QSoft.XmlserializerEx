@@ -17,12 +17,34 @@ namespace ConsoleApp1
             XmlserializerEx xmlex = new XmlserializerEx();
             string str = xmlex.Serialize(new
             {
+                Mode = Modes.Manual,
                 Array = new int[] { 1,2,3,4,5,6},
                 List = new List<string> { "AA", "BB", "CC" },
                 Account ="AA",
                 Password="BB",
                 Age=18,
                 Time= DateTime.Now,
+                Configs = new List<Config>()
+                {
+                    new Config()
+                    {
+                        Number = 1,
+                        Max =10,
+                        Min=-100
+                    },
+                    new Config()
+                    {
+                        Number = 2,
+                        Max =20,
+                        Min=-200
+                    },
+                    new Config()
+                    {
+                        Number = 3,
+                        Max =30,
+                        Min=-300
+                    },
+                },
                 Config = new
                 {
                     Number = 100,
@@ -97,12 +119,21 @@ namespace ConsoleApp1
     public class AA
     {
         //public Array Array { set; get; } = new int[] { 1, 2, 3, 4, 5, 6 };
+        public Modes Mode { set; get; } = Modes.Manual;
         public List<string> List { set; get; } = new List<string> { "AA", "BB", "CC" };
         public string Account { set; get; } = "AA";
         public string Password { set; get; } = "BB";
         public int Age { set; get; } = 18;
         public DateTime Time { set; get; } = DateTime.Now;
         public Config Config { set; get; }
+        public List<Config> Configs { set; get; }
+    }
+
+    public enum Modes
+    {
+        Auto,
+        Manual,
+        Test
     }
 
     public class Config
