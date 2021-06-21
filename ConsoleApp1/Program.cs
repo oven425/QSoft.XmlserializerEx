@@ -50,8 +50,12 @@ namespace ConsoleApp1
                     Number = 100,
                     Max =10,
                     Min=-10
-                }
-            }, "AA");
+                },
+                Double = 9.87654321,
+        Float = (float)1.23456789,
+        Decimal = new decimal(3333.44444),
+        SByte = 10
+    }, "AA");
             Console.WriteLine(str);
 
             XmlSerializer xml = new XmlSerializer(typeof(AA));
@@ -68,14 +72,30 @@ namespace ConsoleApp1
 
             }
 
+            //int sum = 0;
+            //for(int i=1; i<=3; i++)
+            //{
+            //    sum = sum + i;
+            //}
+            //int begin = 2;
+            //int end = 4;
+            //int sum = 0;
+            //for (int i = begin; i <= end; i++)
+            //{
+            //    sum = sum + i;
+            //}
+            int begin = 1;
+            int end = 9;
+            int step = 2;
             int sum = 0;
-            for(int i=1; i<=3; i++)
+            for (int i = begin; i <= end; i=i+ step)
             {
                 sum = sum + i;
             }
             Console.WriteLine(sum);
             sum = Sum(3);
-            sum = Sum(1, 3);
+            sum = Sum(2, 4);
+            sum = Sum(1, 9, 2);
             sum = Sum(1, 5, (x)=>x+2);
             var vv = Test();
         }
@@ -94,6 +114,15 @@ namespace ConsoleApp1
                 return 0;
             }
             return begin + Sum(func(begin), end, func);
+        }
+
+        static int Sum(int begin, int end, int step)
+        {
+            if (end < begin)
+            {
+                return 0;
+            }
+            return begin + Sum(begin + step, end, step);
         }
 
         static int Sum(int begin, int end)
@@ -127,6 +156,11 @@ namespace ConsoleApp1
         public DateTime Time { set; get; } = DateTime.Now;
         public Config Config { set; get; }
         public List<Config> Configs { set; get; }
+        public double Double { set; get; } = 1.23456789;
+        public float Float { set; get; } = (float)2.12345;
+        public Decimal Decimal { set; get; } = new decimal(1111);
+        public SByte SByte { set; get; } = 1;
+        public TimeSpan TimeSpan { set; get; } = TimeSpan.FromSeconds(5);
     }
 
     public enum Modes
